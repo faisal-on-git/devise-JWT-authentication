@@ -29,7 +29,7 @@ $ rails db:create db:migrate
 
 
 # Run the server
-$ bin/rails server # => http://localhost:3001
+$ bin/rails server # => http://localhost:3000
 ```
 
 ### Environment variables
@@ -38,15 +38,20 @@ The ONLY required env var is the JWT secret Devise will use to sign tokens.
 Add it to `config/credentials.yml.enc` (preferred) or export before boot:
 
 ```bash
+
 bundle exec rails secret
+
+#VSCode 
+EDITOR='code --wait' rails credentials:edit
+devise_jwt_secret_key: (copy and paste the generated secret here)
 ```
 
 ---
 
 ## 🔌 API Endpoints
 
-| Method | Path      | Description               | Headers / Body                  |
-| ------ | --------- | ------------------------- | ------------------------------- |
-| POST   | `/signup` | Create a new user         | ``                              |
-| POST   | `/login`  | Obtain a JWT              | `{ email, password }`           |
-| DELETE | `/logout` | Revoke the current JWT    | `Authorization: Bearer <token>` |
+| Method | Path      | Description            | Headers / Body                                                                                         |
+| ------ | --------- | ---------------------- | ------------------------------------------------------------------------------------------------------ |
+| POST   | `/signup` | Create a new user      | `{"user": {"email": "fakeusertest@example3.com", "password": "securepassword", "name": "Fake User2"}}` |
+| POST   | `/login`  | Obtain a JWT           | `{"user": { "email": "fakeuser@example.com", "password": "securepassword" }}`                          |
+| DELETE | `/logout` | Revoke the current JWT | `Authorization: Bearer <token>`                                                                        |
