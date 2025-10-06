@@ -1,24 +1,52 @@
-# README
+# Devise Authentication API
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+This repository is a **Rails 7.1 API-only** starter kit that shows how to build a token-based authentication layer using **Devise** and **JWT**.
 
-Things you may want to cover:
+## 🛠 Tech Stack
 
-* Ruby version
+| Layer      | Choice                    |
+| ---------- | ------------------------- |
+| Framework  | Rails 7.1 (API-only mode) |
+| Auth       | Devise + devise-jwt       |
+| DB         | PostgreSQL                |
+| Serializer | jsonapi-serializer        |
 
-* System dependencies
+---
 
-* Configuration
+## 🚀 Quick start (local)
 
-* Database creation
+```bash
+# Clone & move in
+$ git clone https://github.com/your-username/devise-authentication.git
+$ cd devise-authentication
 
-* Database initialization
+# Install gems
+$ bundle install
 
-* How to run the test suite
+# Create DBs & run migrations
+$ rails db:create db:migrate
 
-* Services (job queues, cache servers, search engines, etc.)
 
-* Deployment instructions
 
-* ...
+# Run the server
+$ bin/rails server # => http://localhost:3001
+```
+
+### Environment variables
+
+The ONLY required env var is the JWT secret Devise will use to sign tokens.
+Add it to `config/credentials.yml.enc` (preferred) or export before boot:
+
+```bash
+bundle exec rails secret
+```
+
+---
+
+## 🔌 API Endpoints
+
+| Method | Path      | Description               | Headers / Body                  |
+| ------ | --------- | ------------------------- | ------------------------------- |
+| POST   | `/signup` | Create a new user         | ``                              |
+| POST   | `/login`  | Obtain a JWT              | `{ email, password }`           |
+| DELETE | `/logout` | Revoke the current JWT    | `Authorization: Bearer <token>` |
